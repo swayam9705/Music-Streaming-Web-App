@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://encore.scdn.co/fonts/SpotifyMixUI-Bold-4264b799009b1db5c491778b1bc8e5b7.woff2');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: black;
+    --secondary: #121212;
+    --tertiary: #282828;
+    --accent: #5e2eb2;
+    --grey: lightgrey;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary);
+}
+
+.App {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 7fr;
+    grid-template-rows: 80px 1fr 80px;
+    grid-gap: 0px;
+    grid-template-areas: 
+                        "navbar navbar"
+                        "sidebar main"
+                        "player player";
+}
