@@ -69,7 +69,14 @@ function MusicPlayer(props) {
                             }}
                         />
 
-                        <div className="skip-previous ctr-btn">
+                        <div
+                            className="skip-previous ctr-btn"
+                            onClick={() => {
+                                if (song.current.currentTime > 10) {
+                                    song.current.currentTime -= 10
+                                }
+                            }}
+                        >
                             <SkipPreviousIcon />
                         </div>
 
@@ -81,7 +88,14 @@ function MusicPlayer(props) {
                             {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
                         </div>
 
-                        <div className="skip-next ctr-btn">
+                        <div
+                            className="skip-next ctr-btn"
+                            onClick={() => {
+                                if (song.current.duration - song.current.currentTime > 10) {
+                                    song.current.currentTime += 10
+                                }
+                            }}
+                        >
                             <SkipNextIcon />
                         </div>
 

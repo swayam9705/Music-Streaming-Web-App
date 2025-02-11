@@ -17,7 +17,7 @@ function App() {
 				<Sidebar />
 				<Hero />
 				<MusicPlayer
-					link="https://aac.saavncdn.com/632/2c5537d265bb8d9e4722e26e422aa505_160.mp4"
+					link="https://aac.saavncdn.com/304/f31ba5ffe986d0feb95b3059ad05f4d5_320.mp4"
 					img="https://picsum.photos/536/354"
 					artist="Adele"
 					title="Skyfall"
