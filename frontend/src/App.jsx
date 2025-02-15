@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // componants
 import Navbar from './Navbar/Navbar'
@@ -9,19 +9,23 @@ import MusicPlayer from './MusicPlayer/MusicPlayer'
 // style
 import "./App.css"
 
+// context
+import { useStateValue } from './ContextManager'
+
 function App() {
+
+	const [ state, _] = useStateValue()
+
 	return (
 		<>
 			<div className='App'>
 				<Navbar />
 				<Sidebar />
 				<Hero />
-				<MusicPlayer
-					link="https://aac.saavncdn.com/304/f31ba5ffe986d0feb95b3059ad05f4d5_320.mp4"
-					img="https://picsum.photos/536/354"
-					artist="Adele"
-					title="Skyfall"
-				/>
+				{
+					state.currentSong && 
+					<MusicPlayer />
+				}
 			</div>
 		</>
 	)

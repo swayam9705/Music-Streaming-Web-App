@@ -1,0 +1,66 @@
+.MusicBox {
+    height: 100%;
+    color: var(--grey);
+}
+
+.MusicBox__info {
+    display: flex;
+}
+
+.MusicBox__info img {
+    border-radius: 10px;
+    width: 400px;
+    height: 400px;
+}
+
+
+.MusicBox__info-desc {
+    margin-left: 40px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.MusicBox__info-playbutton {
+    --s: 50px;
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--grey);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.MusicBox__info-playbutton .playbutton {
+    font-size: 40px;
+}
+
+.MusicBox__info-desc div:last-of-type {
+    margin-top: auto;
+}
+
+.MusicBox__info-title {
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.MusicBox__info-artist-title {
+    color: grey;
+}
+
+.MusicBox__info-artists ul {
+    display: flex;
+    gap: 8px;
+}
+
+.MusicBox__info-releaseDate {
+    margin-bottom: 0;
+}
+
+.MusicBox__info-releaseDate-title {
+    color: grey;
+}

@@ -31,3 +31,7 @@ body {
                         "sidebar main"
                         "player player";
 }
+
+li {
+    list-style-type: none;
+}

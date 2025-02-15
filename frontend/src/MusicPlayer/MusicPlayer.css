@@ -26,6 +26,12 @@
     margin-right: 10px;
 }
 
+.MusicPlayer__description ul {
+    display: flex;
+    gap: 10px;
+    color: grey;
+} 
+
 .MusicPlayer__description {
     margin-left: 10px;
     display: flex;

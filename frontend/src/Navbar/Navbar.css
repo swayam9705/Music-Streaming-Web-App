@@ -52,4 +52,5 @@
     display: grid;
     place-items: center;
     color: var(--grey);
+    cursor: pointer;
 }

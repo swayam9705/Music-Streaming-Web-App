@@ -8,8 +8,13 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import PauseIcon from '@mui/icons-material/Pause';
 
+// content
+import { useStateValue } from "../ContextManager";
 
-function MusicPlayer(props) {
+
+function MusicPlayer() {
+
+    const [ state, _ ] = useStateValue()
 
     const [isPlaying, setIsPlaying] = useState(false)
     const progressBar = useRef(null)
@@ -17,12 +22,14 @@ function MusicPlayer(props) {
     const playBtn = useRef(null)
 
     useEffect(() => {
-        if (song.current.play()) {
-            setInterval(() => {
-                progressBar.current.value = song.current.currentTime
-            }, 500)
-        }
+        console.log(state.currentSong.media_url)
     }, [])
+
+    const onMusicPlaying = () => {
+        setInterval(() => {
+            progressBar.current.value = song.current?.currentTime
+        }, 500)
+    }
 
     const playPause = () => {
         setIsPlaying(!isPlaying)
@@ -38,6 +45,7 @@ function MusicPlayer(props) {
     return (
         <div className="MusicPlayer">
             <audio
+                onPlaying={onMusicPlaying}
                 ref={song}
                 onLoadedMetadata={() => {
                     progressBar.current.max = song.current.duration
@@ -45,16 +53,16 @@ function MusicPlayer(props) {
                 }}
             >
                 <source
-                    src={props.link}
+                    src={ state.currentSong.media_url }
                     type="audio/mpeg"
                 />
             </audio>
             <div className="MusicPlayer__container">
                 <div className="MusicPlayer__part MusicPlayer__part--left">
-                    <img src={props.img} alt="music" />
+                    <img src={state.currentSong.image} alt="music" />
                     <div className="MusicPlayer__description">
-                        <span className="MusicPlayer__title">{ props.title }</span>
-                        <span className="MusicPlayer__artist">{ props.artist }</span>
+                        <span className="MusicPlayer__title">{ state.currentSong.album }</span>
+                        <ul className="MusicPlayer__artist">{ Object.keys(state.currentSong.artistMap).map(key => <li key={key}> { key }</li>) }</ul>
                     </div>
                 </div>
                 <div className="MusicPlayer__part MusicPlayer__part--center">
