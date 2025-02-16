@@ -42,6 +42,7 @@ const Navbar = () => {
             <img className='Navbar__logo' src={Logo} alt="logo" />
             <div className="Navbar__search-bar">
                 <input
+                    autoComplete='off'
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder='Search...'

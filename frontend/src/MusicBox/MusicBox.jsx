@@ -15,7 +15,6 @@ const MusicBox = () => {
             type: 'SET_CURRENT_SONG',
             currentSong: state.searchedSong
         })
-        console.log(state.currentSong.media_url)
     }
 
     return (

@@ -22,8 +22,10 @@ function MusicPlayer() {
     const playBtn = useRef(null)
 
     useEffect(() => {
+        progressBar.current.value = 0
+        song.current.src = state.currentSong.media_url
         console.log(state.currentSong.media_url)
-    }, [])
+    }, [state])
 
     const onMusicPlaying = () => {
         setInterval(() => {
@@ -71,6 +73,7 @@ function MusicPlayer() {
                             className="range"
                             ref={progressBar}
                             type="range"
+                            value={0}
                             onChange={() => {
                                 song.current.play()
                                 song.current.currentTime = progressBar.current.value
