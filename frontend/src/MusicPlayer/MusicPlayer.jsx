@@ -66,6 +66,7 @@ function MusicPlayer() {
                         <span className="MusicPlayer__title">{ state.currentSong.album }</span>
                         <ul className="MusicPlayer__artist">{ Object.keys(state.currentSong.artistMap).map(key => <li key={key}> { key }</li>) }</ul>
                     </div>
+                    <div className="shadow"></div>
                 </div>
                 <div className="MusicPlayer__part MusicPlayer__part--center">
                     <div className="MusicPlayer__controls">

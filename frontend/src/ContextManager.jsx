@@ -3,7 +3,9 @@ import { createContext, useContext, useReducer } from "react"
 const intialState = {
     searchedSong: null,
     currentSong: null,
-    loading: false
+    loading: false,
+    isUserLoggedIn: false,
+    user: null
 }
 
 const StateContext = createContext()

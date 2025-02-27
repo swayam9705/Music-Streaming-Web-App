@@ -6,7 +6,7 @@ import MusicBox from "../MusicBox/MusicBox"
 // Context API
 import { useStateValue } from "../ContextManager"
 
-import DOMPurify from "dompurify"
+import SkeletonHero from "../Skeleton/Skeleton"
 
 function Hero() {
 
@@ -20,7 +20,7 @@ function Hero() {
 
     if (state.loading) {
         content = (
-            <p>The song is loading</p>
+            <SkeletonHero />
         )
     }
     else if (state.searchedSong && !state.loading){
@@ -32,6 +32,7 @@ function Hero() {
     return (
         <div className="Hero">
             { content }
+            <div className="shadow"></div>
         </div>
     )
 }

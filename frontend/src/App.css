@@ -12,11 +12,14 @@
     --tertiary: #282828;
     --accent: #5e2eb2;
     --grey: lightgrey;
+
+    --light-accent: #251939;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--primary);
+    overflow: hidden;
 }
 
 .App {

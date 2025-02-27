@@ -5,6 +5,7 @@ import Navbar from './Navbar/Navbar'
 import Sidebar from "./Sidebar/Sidebar"
 import Hero from './Hero/Hero'
 import MusicPlayer from './MusicPlayer/MusicPlayer'
+import SignUp from './SignUp/SignUp'
 
 // style
 import "./App.css"
@@ -18,6 +19,8 @@ function App() {
 
 	return (
 		<>
+		{
+			state.isUserLoggedIn ?
 			<div className='App'>
 				<Navbar />
 				<Sidebar />
@@ -27,6 +30,9 @@ function App() {
 					<MusicPlayer />
 				}
 			</div>
+			:
+			<SignUp />
+		}
 		</>
 	)
 }
