@@ -6,11 +6,15 @@ import Logo from "../assets/logo.svg"
 
 import { useStateValue } from '../ContextManager';
 
+// firebase imports
+import { signOut } from "firebase/auth"
+import { auth } from "../config/firebase_config"
+
 
 const Navbar = () => {
 
     const [ query, setQuery ] = useState("")
-    const [ _, dispatch ] = useStateValue()
+    const [ state, dispatch ] = useStateValue()
 
     const fetchSongData = async () => {
         try {
@@ -37,6 +41,16 @@ const Navbar = () => {
         }
     }
 
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => {
+                dispatch({ type: 'LOGGED_OUT' })
+            })
+            .catch((error) => {
+                console.log("sign out error, you messed up")
+            })
+    }
+
     return (
         <nav class="Navbar">
             <img className='Navbar__logo' src={Logo} alt="logo" />
@@ -55,6 +69,18 @@ const Navbar = () => {
                 >
                     <SearchIcon />
                 </button>
+            </div>
+            <div className="Navbar__username">
+                <div className="Navbar__username-circle">{ state.user.displayName[0] }</div>
+                <div className="Navbar__username-name">{ state.user.displayName }</div>
+                <div className="Navbar__username__dropdown">
+                    <button
+                        onClick={() => {
+                            handleLogout()
+                        }}
+                        className="logout"
+                    >Logout</button>
+                </div>
             </div>
         </nav>
     );

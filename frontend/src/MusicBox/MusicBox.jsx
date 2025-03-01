@@ -22,7 +22,7 @@ const MusicBox = () => {
             <div className="MusicBox__info">
                 <img src={state.searchedSong.image} alt="Song image" />
                 <div className="MusicBox__info-desc">
-                    <span className="MusicBox__info-title">{ state.searchedSong.album }</span>
+                    <span className="MusicBox__info-title">{ state.searchedSong.song }</span>
                     <span className="MusicBox__info-artists">
                         <span className="MusicBox__info-artist-title">Artist: </span>
                         <ul>

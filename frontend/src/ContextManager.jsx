@@ -32,6 +32,18 @@ const reducer = (state, action) => {
                 ...state,
                 loading: false
             }
+        case 'LOGGED_IN':
+            return {
+                ...state,
+                isUserLoggedIn: true,
+                user: action.user
+            }
+        case 'LOGGED_OUT':
+            return {
+                ...state,
+                isUserLoggedIn: false,
+                user: null
+            }
         default:
             return state
     }

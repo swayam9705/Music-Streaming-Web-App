@@ -1,11 +1,35 @@
 import React from "react"
 import Logo from "../assets/logo.svg"
-
 import GoogleIcon from "@mui/icons-material/Google"
-
 import "./SignUp.css"
 
+// firebase sign in with google
+import { auth } from "../config/firebase_config"
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+
+import { useStateValue } from "../ContextManager"
+
 function SignUp() {
+
+    const [ _, dispatch ] = useStateValue()
+
+    const handleClick = async () => {
+        const provider = new GoogleAuthProvider
+        await signInWithPopup(auth, provider)
+            .then((userCredential) => {
+                const user = userCredential.user
+                dispatch({
+                    type: "LOGGED_IN",
+                    user: user
+                })
+
+                console.log("sign up successfull")
+                console.log(user)
+            })
+            .catch((error) => {
+                console.log("sign up error occured. you messed up")
+            })
+    }
 
     return (
         <div className="Signup">
@@ -14,7 +38,9 @@ function SignUp() {
             </div>
             <div className="Signup__form">
                 <h1>Sign In</h1>
-                <button className="Signup__signinwithgoogle">Sign In with Google <GoogleIcon className="Signup__google-icon" /> </button>
+                <button
+                    onClick={handleClick} 
+                className="Signup__signinwithgoogle">Sign In with Google <GoogleIcon className="Signup__google-icon" /> </button>
             </div>
         </div>
     )
