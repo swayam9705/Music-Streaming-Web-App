@@ -4,8 +4,11 @@ const intialState = {
     searchedSong: null,
     currentSong: null,
     loading: false,
-    isUserLoggedIn: false,
-    user: null
+    isUserLoggedIn: true,
+    user: {
+        displayName: "Swayam Bhoir"
+    },
+    songList: []
 }
 
 const StateContext = createContext()
@@ -43,6 +46,11 @@ const reducer = (state, action) => {
                 ...state,
                 isUserLoggedIn: false,
                 user: null
+            }
+        case 'ADD_SONG':
+            return {
+                ...state,
+                songList: [...state.songList, action.song]
             }
         default:
             return state

@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import "./Hero.css"
 
 import MusicBox from "../MusicBox/MusicBox"
+import Collection from "../Collection/Collection"
 
 // Context API
 import { useStateValue } from "../ContextManager"
@@ -16,18 +17,18 @@ function Hero() {
         console.log(state.searchedSong?.album)
     }, [])
 
-    let content
+    let content = <Collection />
 
-    if (state.loading) {
-        content = (
-            <SkeletonHero />
-        )
-    }
-    else if (state.searchedSong && !state.loading){
-        content = (
-            <MusicBox />
-        )
-    }
+    // if (state.loading) {
+    //     content = (
+    //         <SkeletonHero />
+    //     )
+    // }
+    // else if (state.searchedSong && !state.loading){
+    //     content = (
+    //         <MusicBox />
+    //     )
+    // }
 
     return (
         <div className="Hero">

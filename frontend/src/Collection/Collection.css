@@ -1,0 +1,14 @@
+.Collection {
+    color: white;
+    padding: 20px;
+}
+
+.Collection__title {
+    margin-bottom: 10px;
+}
+
+.Collection__cards {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
