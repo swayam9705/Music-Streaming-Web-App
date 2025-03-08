@@ -1,10 +1,8 @@
 import { createContext, useContext, useReducer } from "react"
 
 const intialState = {
-    isUserLoggedIn: true,
-    user: {
-        displayName: "Swayam Bhoir"
-    },
+    isUserLoggedIn: false,
+    user: {},
     songList: []
 }
 

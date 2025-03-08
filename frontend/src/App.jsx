@@ -24,6 +24,9 @@ function App() {
 				<Navbar />
 				<Sidebar />
 				<Hero />
+				<Routes>
+					<Route path="/song/:id" element={<MusicPlayer />} />
+				</Routes>
 		</div>
 		:
 		<SignUp />
