@@ -1,9 +1,6 @@
 import { createContext, useContext, useReducer } from "react"
 
 const intialState = {
-    searchedSong: null,
-    currentSong: null,
-    loading: false,
     isUserLoggedIn: true,
     user: {
         displayName: "Swayam Bhoir"
@@ -15,26 +12,6 @@ const StateContext = createContext()
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'SET_CURRENT_SONG':
-            return {
-                ...state,
-                currentSong: action.currentSong
-            }
-        case 'SET_SEARCHED_SONG':
-            return {
-                ...state,
-                searchedSong: action.searchedSong
-            }
-        case 'SET_LOADING':
-            return {
-                ...state,
-                loading: true
-            }
-        case 'UNSET_LOADING':
-            return {
-                ...state,
-                loading: false
-            }
         case 'LOGGED_IN':
             return {
                 ...state,
@@ -50,7 +27,7 @@ const reducer = (state, action) => {
         case 'ADD_SONG':
             return {
                 ...state,
-                songList: [...state.songList, action.song]
+                songList: action.songs
             }
         default:
             return state

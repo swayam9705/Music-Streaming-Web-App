@@ -1,6 +1,7 @@
 .MusicBox {
     height: 100%;
     color: var(--grey);
+    padding: 50px;
 }
 
 .MusicBox__info {
@@ -9,8 +10,8 @@
 
 .MusicBox__info img {
     border-radius: 10px;
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
 }
 
 .MusicBox__info-desc {
@@ -62,4 +63,56 @@
 
 .MusicBox__info-releaseDate-title {
     color: grey;
+}
+
+.MusicBox__lyrics {
+    margin: 40px 0 ;
+    width: 500px;
+    /* outline: 2px solid white; */
+    background: var(--tertiary);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.MusicBox__lyrics__title {
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.MusicBox__lyrics-box-langs {
+    display: flex;
+    justify-content: space-between;
+    background: var(--secondary);
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 30px;
+    height: 50px;
+    position: relative;
+}
+
+.MusicBox__lyrics-box-langs .background {
+    position: absolute;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: var(--accent);
+}
+
+.MusicBox__lyrics-lang {
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 40px;
+    width: 50%;
+    text-align: center;
+    height: 100%;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.MusicBox__lyrics-actual-lyrics {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Routes, Route} from 'react-router-dom'
 
 // componants
 import Navbar from './Navbar/Navbar'
@@ -17,23 +18,21 @@ function App() {
 
 	const [ state, _] = useStateValue()
 
-	return (
-		<>
-		{
-			state.isUserLoggedIn ?
-			<div className='App'>
+	const content = (
+		state.isUserLoggedIn ?
+		<div className='App'>
 				<Navbar />
 				<Sidebar />
 				<Hero />
-				{
-					state.currentSong && 
-					<MusicPlayer />
-				}
-			</div>
-			:
-			<SignUp />
-		}
-		</>
+		</div>
+		:
+		<SignUp />
+	)
+
+	return (
+		<Routes>
+			<Route path='*' element={content} />
+		</Routes>
 	)
 }
 

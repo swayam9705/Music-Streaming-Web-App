@@ -12,24 +12,24 @@ import PauseIcon from '@mui/icons-material/Pause';
 import { useStateValue } from "../ContextManager";
 
 
-function MusicPlayer() {
+function MusicPlayer({ song }) {
 
     const [ state, _ ] = useStateValue()
 
     const [isPlaying, setIsPlaying] = useState(false)
     const progressBar = useRef(null)
-    const song = useRef(null)
+    const songRef = useRef(null)
     const playBtn = useRef(null)
 
     useEffect(() => {
         progressBar.current.value = 0
-        song.current.src = state.currentSong.media_url
-        console.log(state.currentSong.media_url)
+        songRef.current.src = song.media_url
+        console.log(song.media_url)
     }, [state])
 
     const onMusicPlaying = () => {
         setInterval(() => {
-            progressBar.current.value = song.current?.currentTime
+            progressBar.current.value = songRef.current?.currentTime
         }, 500)
     }
 
@@ -37,10 +37,10 @@ function MusicPlayer() {
         setIsPlaying(!isPlaying)
 
         if (isPlaying) {
-            song.current.pause()
+            songRef.current.pause()
         }
         else {
-            song.current.play()
+            songRef.current.play()
         }
     }
 
@@ -48,23 +48,23 @@ function MusicPlayer() {
         <div className="MusicPlayer">
             <audio
                 onPlaying={onMusicPlaying}
-                ref={song}
+                ref={songRef}
                 onLoadedMetadata={() => {
-                    progressBar.current.max = song.current.duration
-                    progressBar.current.value = song.current.currentTime
+                    progressBar.current.max = songRef.current.duration
+                    progressBar.current.value = songRef.current.currentTime
                 }}
             >
                 <source
-                    src={ state.currentSong.media_url }
+                    src={ song.media_url }
                     type="audio/mpeg"
                 />
             </audio>
             <div className="MusicPlayer__container">
                 <div className="MusicPlayer__part MusicPlayer__part--left">
-                    <img src={state.currentSong.image} alt="music" />
+                    <img src={song.image} alt="music" />
                     <div className="MusicPlayer__description">
-                        <span className="MusicPlayer__title">{ state.currentSong.album }</span>
-                        <ul className="MusicPlayer__artist">{ Object.keys(state.currentSong.artistMap).map(key => <li key={key}> { key }</li>) }</ul>
+                        <span className="MusicPlayer__title">{ song.song }</span>
+                        <span className="MusicPlayer__artist">{ song.singer }</span>
                     </div>
                     <div className="shadow"></div>
                 </div>
@@ -76,16 +76,16 @@ function MusicPlayer() {
                             type="range"
                             value={0}
                             onChange={() => {
-                                song.current.play()
-                                song.current.currentTime = progressBar.current.value
+                                songRef.current.play()
+                                songRef.current.currentTime = progressBar.current.value
                             }}
                         />
 
                         <div
                             className="skip-previous ctr-btn"
                             onClick={() => {
-                                if (song.current.currentTime > 10) {
-                                    song.current.currentTime -= 10
+                                if (songRef.current.currentTime > 10) {
+                                    songRef.current.currentTime -= 10
                                 }
                             }}
                         >
@@ -103,8 +103,8 @@ function MusicPlayer() {
                         <div
                             className="skip-next ctr-btn"
                             onClick={() => {
-                                if (song.current.duration - song.current.currentTime > 10) {
-                                    song.current.currentTime += 10
+                                if (songRef.current.duration - songRef.current.currentTime > 10) {
+                                    songRef.current.currentTime += 10
                                 }
                             }}
                         >

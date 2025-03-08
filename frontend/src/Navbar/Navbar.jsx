@@ -16,31 +16,6 @@ const Navbar = () => {
     const [ query, setQuery ] = useState("")
     const [ state, dispatch ] = useStateValue()
 
-    const fetchSongData = async () => {
-        try {
-            dispatch({ type: 'SET_LOADING' })
-            const response = await fetch(`http://localhost:5000/result/?query=${query}&lyrics=true`)
-
-            const json = await response.json()
-            for (let songData of json) {
-                if (songData.has_lyrics) {
-                    dispatch({
-                        type: "SET_SEARCHED_SONG",
-                        searchedSong: songData
-                    })
-                    break
-                }
-            }
-        }
-        catch(err) {
-            console.log("error occured, you messed up")
-        }
-
-        finally {
-            dispatch({ type: "UNSET_LOADING" })
-        }
-    }
-
     const handleLogout = () => {
         signOut(auth)
             .then(() => {
@@ -63,9 +38,6 @@ const Navbar = () => {
                     className='Navbar__search-input' type="text" name="query" id="query" />
                 <button
                     className='Navbar__search-btn'
-                    onClick={() => {
-                        fetchSongData()
-                    }}
                 >
                     <SearchIcon />
                 </button>

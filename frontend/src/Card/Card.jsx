@@ -2,6 +2,7 @@ import React from "react"
 import "./Card.css"
 
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded'
+import { Link } from "react-router-dom"
 function Card({ song }) {
     return (
         <div className="Card">
@@ -14,9 +15,9 @@ function Card({ song }) {
                 <h3 className="Card__title">{song.song}</h3>
                 <p className="Card__singer">{song.singer}</p>
                 <p className="Card__release-date">{song.release_date}</p>
-                <a href={"#"} className="Card__play">
+                <Link to={`/song/${song.id}`} className="Card__play">
                     <PlayArrowRoundedIcon className="Card__playbn" />
-                </a>
+                </Link>
             </div>
         </div>
     )

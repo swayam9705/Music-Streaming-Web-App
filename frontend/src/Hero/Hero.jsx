@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import "./Hero.css"
+import { Route, Routes } from "react-router-dom"
 
 import MusicBox from "../MusicBox/MusicBox"
 import Collection from "../Collection/Collection"
@@ -12,10 +13,6 @@ import SkeletonHero from "../Skeleton/Skeleton"
 function Hero() {
 
     const [ state, dispatch ] = useStateValue()
-
-    useEffect(() => {
-        console.log(state.searchedSong?.album)
-    }, [])
 
     let content = <Collection />
 
@@ -32,8 +29,12 @@ function Hero() {
 
     return (
         <div className="Hero">
-            { content }
-            <div className="shadow"></div>
+            <Routes>
+                <Route path="/" element={<Collection />} />
+                <Route path="song/:id" element={<MusicBox />} />
+            </Routes>
+            {/* { content } */}
+            {/* <div className="shadow"></div> */}
         </div>
     )
 }
