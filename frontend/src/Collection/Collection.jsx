@@ -33,6 +33,7 @@ function Collection() {
         })
     }, [])
 
+    console.log(state.songList)
 
     return (
         <div className="Collection">

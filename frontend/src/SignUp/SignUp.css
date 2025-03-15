@@ -41,7 +41,8 @@
     font-size: 20px;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    transition: 0.3s;
 }
 
 .Signup__signinwithgoogle:hover {
@@ -51,4 +52,26 @@
 .Signup__google-icon {
     font-size: 16px;
     margin-left: 10px;
+    width: 30px;
+}
+
+/* 3d animation to logo */
+.SignUp__logo {
+  perspective: 800px;
+  display: inline-block;
+}
+
+.SignUp__logo img {
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+  animation: float 1s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotateX(0deg) rotateY(30deg);
+    }
+    100% {
+        transform: translateY(20px) rotateX(0deg) rotateY(30deg);
+    }
 }

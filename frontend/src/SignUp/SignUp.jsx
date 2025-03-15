@@ -2,6 +2,7 @@ import React from "react"
 import Logo from "../assets/logo.svg"
 import GoogleIcon from "@mui/icons-material/Google"
 import "./SignUp.css"
+import GoogleImage from "../assets/google.png"
 
 // firebase sign in with google
 import { auth } from "../config/firebase_config"
@@ -40,7 +41,9 @@ function SignUp() {
                 <h1>Sign In</h1>
                 <button
                     onClick={handleClick} 
-                className="Signup__signinwithgoogle">Sign In with Google <GoogleIcon className="Signup__google-icon" /> </button>
+                    className="Signup__signinwithgoogle">Sign In with Google 
+                    <img src={GoogleImage} alt="Google icon" className="Signup__google-icon" />
+                </button>
             </div>
         </div>
     )

@@ -14,9 +14,28 @@ import "./App.css"
 // context
 import { useStateValue } from './ContextManager'
 
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from './config/firebase_config'
+
 function App() {
 
-	const [ state, _] = useStateValue()
+	const [ state, dispatch] = useStateValue()
+	const [ songs, setSongs ] = useState([])
+	
+	// const getCollection = async() => {
+	// 	const querySnapshot = await getDocs(collection(db, "songs"))
+	// 	querySnapshot.forEach((doc) => {
+	// 		setSongs(song => [...song, {id: doc.id, ...doc.data()}])
+	// 	})
+	// }
+
+	// useEffect(() => {
+	// 	getCollection()
+	// 	dispatch({
+	// 		type: "ADD_SONG",
+	// 		songs: songs
+	// 	})
+	// }, [])
 
 	const content = (
 		state.isUserLoggedIn ?
