@@ -10,34 +10,24 @@ import { db } from "../config/firebase_config"
 const MusicBox = () => {
 
     const [ song, setSong ] = useState({})
-    const [ loading, setLoading ] = useState(true)
+    const [ state, dispatch ] = useStateValue()
 
     // get the params of the url of react router
     const { id } = useParams()
 
     useEffect(() => {
         const fetchSong = async () => {
-            try {
-                const docRef = doc(db, "songs", id)
-                const docSnap = await getDoc(docRef)
+            const fetchedSong = state.songList.find(song => song.id == id)
+            dispatch({
+                type: "ADD_RECENT",
+                song: fetchedSong
+            })
 
-                if (docSnap.exists()) {
-                    setSong(docSnap.data())
-                } else {
-                    console.log("No such document!")
-                }
-            }
-            catch (err) {
-                console.log("Error getting document:", err)
-            }
-            finally {
-                setLoading(false)
-            }
+            setSong({...fetchedSong})
         }
 
         fetchSong()
     }, [id])
-
 
     return (
         <div className="MusicBox">
@@ -62,12 +52,19 @@ const MusicBox = () => {
             <div className="MusicBox__lyrics">
                 <h3 className="MusicBox__lyrics__title">Lyrics: </h3>
                 <div className="MusicBox__lyrics-box">
-                    <div className="MusicBox__lyrics-box-langs">
-                        <span className="MusicBox__lyrics-lang">Original</span>
-                        <span className="MusicBox__lyrics-lang">Hindi</span>
-                    </div>
-                    <div className="MusicBox__lyrics-actual-lyrics">
-                        <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(song.lyrics)}}></p>
+                    <div className="MusicBox__lyrics-container">
+                        <div className="MusicBox__lyrics-actual-lyrics">
+                            <div className="MusicBox__lyrics-lang">Original:</div>
+                            <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(song.lyrics)}}></p>
+                        </div>
+                        <div className="MusicBox__lyrics-actual-lyrics">
+                            <div className="MusicBox__lyrics-lang">Hindi:</div>
+                            <p
+                                // dangerouslySetInnerHTML={{
+                                //     __html: DOMPurify.sanitize(song.lyrics)
+                                // }} 
+                            >No hindi lyrics available</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,13 @@
 import { createContext, useContext, useReducer } from "react"
 
-const intialState = {
+const initialState = {
     isUserLoggedIn: true,
-    user: {displayName: "Swayam Bhoir"},
-    songList: []
+    user: {
+        displayName: "Swayam Bhoir"
+    },
+    songList: [],
+    currentSong: null,
+    recents: []
 }
 
 const StateContext = createContext()
@@ -22,10 +26,26 @@ const reducer = (state, action) => {
                 isUserLoggedIn: false,
                 user: null
             }
-        case 'ADD_SONG':
+        case 'ADD_SONGS':
             return {
                 ...state,
                 songList: action.songs
+            }
+        case 'SET_CURRENT_SONG':
+            return {
+                ...state,
+                currentSong: action.currentSong
+            }
+        case 'ADD_RECENT':
+            let list = state.recents
+            if (list.length == 5) {
+                list.pop()
+            }
+            list.unshift(action.song)
+            return {
+                ...state,
+                recents: list
+                
             }
         default:
             return state
@@ -34,7 +54,7 @@ const reducer = (state, action) => {
 
 export function ContextProvider(props) {
     return (
-        <StateContext.Provider value={useReducer(reducer, intialState)}>
+        <StateContext.Provider value={useReducer(reducer, initialState)}>
             { props.children }
         </StateContext.Provider>
     )

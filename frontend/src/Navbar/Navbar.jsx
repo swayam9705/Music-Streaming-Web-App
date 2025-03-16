@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Logo from "../assets/logo.svg"
 
 import { useStateValue } from '../ContextManager';
+import { Link } from 'react-router-dom';
 
 // firebase imports
 import { signOut } from "firebase/auth"
@@ -28,20 +29,22 @@ const Navbar = () => {
 
     return (
         <nav class="Navbar">
-            <img className='Navbar__logo' src={Logo} alt="logo" />
-            <div className="Navbar__search-bar">
+            <Link to={"/"}><img className='Navbar__logo' src={Logo} alt="logo" /></Link>
+            {/* <div className="Navbar__search-bar">
                 <input
                     autoComplete='off'
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder='Search...'
-                    className='Navbar__search-input' type="text" name="query" id="query" />
+                    className='Navbar__search-input' type="text" name="query" id="query"
+                />
                 <button
                     className='Navbar__search-btn'
                 >
                     <SearchIcon />
                 </button>
-            </div>
+            </div> */}
+            <div className="link"><Link to={"/"} >Collection</Link></div>
             <div className="Navbar__username">
                 <div className="Navbar__username-circle">{ state.user.displayName[0] }</div>
                 <div className="Navbar__username-name">{ state.user.displayName }</div>

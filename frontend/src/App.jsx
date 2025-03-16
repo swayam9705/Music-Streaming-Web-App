@@ -21,22 +21,31 @@ function App() {
 
 	const [ state, dispatch] = useStateValue()
 	const [ songs, setSongs ] = useState([])
+
 	
-	// const getCollection = async() => {
-	// 	const querySnapshot = await getDocs(collection(db, "songs"))
-	// 	querySnapshot.forEach((doc) => {
-	// 		setSongs(song => [...song, {id: doc.id, ...doc.data()}])
-	// 	})
-	// }
+	useEffect(() => {
 
-	// useEffect(() => {
-	// 	getCollection()
-	// 	dispatch({
-	// 		type: "ADD_SONG",
-	// 		songs: songs
-	// 	})
-	// }, [])
+		async function getCollection() {
+			const querySnapshot = await getDocs(collection(db, "songs"))
+			const fetchedSongs = querySnapshot.docs.map(doc => ({
+				id: doc.id,
+				...doc.data()
+			}))
+			setSongs(fetchedSongs)
+		}
 
+		getCollection()
+	}, [])
+
+	useEffect(() => {
+		if (songs.length > 0) {
+			dispatch({
+				type: "ADD_SONGS",
+				songs: songs
+			})
+		}
+	}, [songs, dispatch])
+	
 	const content = (
 		state.isUserLoggedIn ?
 		<div className='App'>

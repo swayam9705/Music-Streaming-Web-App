@@ -25,6 +25,8 @@ function MusicPlayer() {
     const intervalRef = useRef(null); // Ref for interval
     const [isLoading, setIsLoading] = useState(true);
 
+    const [state, dispatch] = useStateValue()
+
     useEffect(() => {
         const fetchSong = async () => {
             setIsLoading(true);
