@@ -4,13 +4,17 @@ import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify"
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useStateValue } from "../ContextManager";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../config/firebase_config"
+
+import { app } from "../config/firebase_config";
 
 const MusicBox = () => {
 
     const [ song, setSong ] = useState({})
     const [ state, dispatch ] = useStateValue()
+
+    const [ lyrics, setLyrics ] = useState([])
 
     // get the params of the url of react router
     const { id } = useParams()
@@ -26,8 +30,24 @@ const MusicBox = () => {
             setSong({...fetchedSong})
         }
 
+        const fetchTranslatedLyrics = async () => {
+            const q = query(collection(db, "users"), where("song", "==", id))
+
+            const querySnapshot = await getDocs(q)
+            querySnapshot.forEach(doc => {
+                console.log(doc.id, "=>", doc.data());
+                setLyrics(lyrics => [...lyrics, doc.data()])
+            })
+            
+        }
+
+        console.log(lyrics)
+        
         fetchSong()
+        fetchTranslatedLyrics()
     }, [id])
+
+
 
     return (
         <div className="MusicBox">
@@ -60,10 +80,12 @@ const MusicBox = () => {
                         <div className="MusicBox__lyrics-actual-lyrics">
                             <div className="MusicBox__lyrics-lang">Hindi:</div>
                             <p
-                                // dangerouslySetInnerHTML={{
-                                //     __html: DOMPurify.sanitize(song.lyrics)
-                                // }} 
-                            >No hindi lyrics available</p>
+                                dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(
+                                        lyrics.length > 0 && lyrics[0].lyrics ? lyrics[0].lyrics : "No hindi lyrics available"
+                                    )
+                                }} 
+                            ></p>
                         </div>
                     </div>
                 </div>
