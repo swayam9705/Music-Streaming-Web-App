@@ -1,7 +1,7 @@
 .Card {
     background: var(--primary);
     padding: 20px;
-    border-radius: 7px;
+    border-radius: 10px;
     height: 450px;
     position: relative;
 }
@@ -14,6 +14,7 @@
 
 .Card__image {
     width: 100%;
+    border-radius: 10px;
 }
 
 .Card__play {

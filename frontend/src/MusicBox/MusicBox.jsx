@@ -8,10 +8,12 @@ import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../config/firebase_config"
 
 import { app } from "../config/firebase_config";
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
 const MusicBox = () => {
 
     const [ song, setSong ] = useState({})
+    const [ lyricsLoading, setLoading ] = useState(true)
     const [ state, dispatch ] = useStateValue()
 
     const [ lyrics, setLyrics ] = useState([])
@@ -29,25 +31,25 @@ const MusicBox = () => {
 
             setSong({...fetchedSong})
         }
-
+        
+        setLoading(true)
         const fetchTranslatedLyrics = async () => {
             const q = query(collection(db, "users"), where("song", "==", id))
 
             const querySnapshot = await getDocs(q)
             querySnapshot.forEach(doc => {
-                console.log(doc.id, "=>", doc.data());
                 setLyrics(lyrics => [...lyrics, doc.data()])
             })
             
         }
-
-        console.log(lyrics)
+        setInterval(() => {
+            setLoading(false)
+        }, 3500)
+        console.log(id)
         
         fetchSong()
         fetchTranslatedLyrics()
     }, [id])
-
-
 
     return (
         <div className="MusicBox">
@@ -82,7 +84,9 @@ const MusicBox = () => {
                             <p
                                 dangerouslySetInnerHTML={{
                                     __html: DOMPurify.sanitize(
-                                        lyrics.length > 0 && lyrics[0].lyrics ? lyrics[0].lyrics : "No hindi lyrics available"
+                                        lyrics.length > 0 && lyrics[0].lyrics && !lyricsLoading ?
+                                        lyrics[0].lyrics :
+                                        "<i>Fetching lyrics. Please wait a moment.</i>"
                                     )
                                 }} 
                             ></p>

@@ -7,7 +7,8 @@ const initialState = {
     },
     songList: [],
     currentSong: null,
-    recents: []
+    recents: [],
+    liked: new Set([])
 }
 
 const StateContext = createContext()
